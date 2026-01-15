@@ -22,7 +22,7 @@ pub fn shutdown_tracer_provider() {
 
 pub async fn setup_telemetry() -> Result<()> {
     if conf::CONFIG.telemetry.is_none() {
-        return tracing::subscriber::set_global_default(
+        tracing::subscriber::set_global_default(
             tracing_subscriber::fmt()
                 .compact()
                 .with_line_number(true)
@@ -30,6 +30,7 @@ pub async fn setup_telemetry() -> Result<()> {
                 .finish(),
         )
         .context("Failed to initialize the tracing subscriber")?;
+        return Ok(());
     }
 
     let telemetry = conf::CONFIG.telemetry.as_ref().unwrap();
