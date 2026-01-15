@@ -22,7 +22,7 @@ pub fn shutdown_tracer_provider() {
 
 pub async fn setup_telemetry() -> Result<()> {
     if conf::CONFIG.telemetry.is_none() {
-        tracing::subscriber::set_global_default(
+        return tracing::subscriber::set_global_default(
             tracing_subscriber::fmt()
                 .compact()
                 .with_line_number(true)
